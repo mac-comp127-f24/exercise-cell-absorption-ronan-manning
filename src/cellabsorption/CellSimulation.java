@@ -31,11 +31,12 @@ public class CellSimulation {
             
             for(Cell cell : cells) {
                 cell.moveAround(canvasCenter);
-                cell.grow(0.02);
             }
 
             canvas.draw();
             canvas.pause(10);
+
+            handleCellInteraction();
         }
     }
 
@@ -56,5 +57,15 @@ public class CellSimulation {
 
     private static double sqr(double x) {
         return x * x;
+    }
+
+    private void handleCellInteraction() {
+        for (int i = 0; i < cells.size(); i++) {
+            Cell cell0 = cells.get(i);
+            for (int j = i + 1; j < cells.size(); j++) {
+                Cell cell1 = cells.get(j);
+                cell0.interactWith(cell1);
+            }
+        }
     }
 }
